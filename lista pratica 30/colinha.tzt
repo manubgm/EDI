@@ -1,0 +1,93 @@
+// ============================================================================
+// COLINHA DE ESTRUTURA DE DADOS: PILHAS E FILAS (ALOCAÇÃO DINÂMICA)
+// ============================================================================
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// ----------------------------------------------------------------------------
+// 0. A ESTRUTURA BÁSICA (O NÓ) - Usado tanto para Pilha quanto para Fila
+// ----------------------------------------------------------------------------
+typedef struct no {
+    int valor;
+    struct no *prox;
+} No;
+
+
+// ============================================================================
+// 1. PILHA (STACK) -> LIFO (Último a Entrar, Primeiro a Sair)
+// Regra de Ouro: Tudo acontece no TOPO (Início).
+// ============================================================================
+
+// PUSH (Empilhar): Insere no INÍCIO da lista
+void push_pilha(No **topo, int valor) {
+    No *novo = (No*) malloc(sizeof(No));
+    novo->valor = valor;
+    
+    novo->prox = *topo; // O novo nó aponta para o antigo topo
+    *topo = novo;       // O novo nó vira o novo topo
+}
+
+// POP (Desempilhar): Remove do INÍCIO da lista
+int pop_pilha(No **topo) {
+    if (*topo == NULL) return -1; // Pilha vazia
+    
+    No *aux = *topo;             // Salva o nó que vai ser removido
+    int valorRemovido = aux->valor; 
+    
+    *topo = aux->prox;           // O topo passa para o de baixo
+    free(aux);                   // Libera a memória
+    return valorRemovido;
+}
+
+
+// ============================================================================
+// 2. FILA (QUEUE) -> FIFO (Primeiro a Entrar, Primeiro a Sair)
+// Regra de Ouro: Entra no FINAL, Sai no INÍCIO.
+// ============================================================================
+
+// Estrutura de controle da Fila para facilitar achar o final [cite: 720-721]
+typedef struct fila {
+    No *inicio;
+    No *final;
+} Fila;
+
+// Inicializar a Fila
+void inicializar_fila(Fila *f) {
+    f->inicio = NULL;
+    f->final = NULL;
+}
+
+// ENQUEUE (Enfileirar): Insere no FINAL da lista [cite: 783-798]
+void enqueue_fila(Fila *f, int valor) {
+    No *novo = (No*) malloc(sizeof(No));
+    novo->valor = valor;
+    novo->prox = NULL; // Como é o último, não aponta pra ninguém
+    
+    if (f->inicio == NULL) { 
+        // Se a fila estava vazia, ele é o início e o fim [cite: 789-790]
+        f->inicio = novo;
+    } else {
+        // Se já tem gente, o atual último passa a apontar pro novo [cite: 792-793]
+        f->final->prox = novo;
+    }
+    f->final = novo; // O novo nó vira o final oficial da fila [cite: 794]
+}
+
+// DEQUEUE (Desenfileirar): Remove do INÍCIO da lista [cite: 808-818]
+int dequeue_fila(Fila *f) {
+    if (f->inicio == NULL) return -1; // Fila vazia
+    
+    No *aux = f->inicio;           // Salva quem está no início
+    int valorRemovido = aux->valor;
+    
+    f->inicio = aux->prox;         // O início passa para o próximo da fila
+    
+    // Se o início ficou nulo (só tinha 1 elemento), o final também fica nulo [cite: 813-814]
+    if (f->inicio == NULL) {
+        f->final = NULL;
+    }
+    
+    free(aux);                     // Libera a memória
+    return valorRemovido;
+}
