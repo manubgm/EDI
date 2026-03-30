@@ -36,7 +36,7 @@ int pop(No **topo,char *placa_dest){
     No *aux = *topo;
     strcpy(placa_dest, aux->placa); // "Devolve" a placa para quem chamou a função
     *topo = aux->prox;          // Move o topo para baixo
-    free(aux);                  // Deleta o nó da memória
+    free(aux);                  // libera nó da memória
     return 1;
 
 
@@ -50,11 +50,11 @@ void saindo(No **estacionamento,No **auxiliar, char *alvo){
     char placa_temp[10];
     int count=0;
 
-    //buscando o alvo
+    //buscando o alvo no estacinametno
     while(!is_empty(*estacionamento)&&strcmp((*estacionamento)->placa,alvo)!=0){
         pop(estacionamento,placa_temp);//tiro do estacionamento
         push(auxiliar,placa_temp);//colocar na aux pra nao perder
-        count++;//conta p mopstrar 
+        count++;//conta p mopstrar dps 
     }
 
     //remove com pop
@@ -85,12 +85,11 @@ int menu(){
 }
 
 int main() {
-    // 1. Inicialização das Pilhas
+    //inicia as pilhas
     No *estacionamento = NULL;
     No *auxiliar = NULL;
     int op;
-    char nome[20]; // Aumentado para 20 para evitar estouro de memória com espaços
-
+    char nome[20];
     do {
         op = menu();
 
@@ -121,7 +120,7 @@ int main() {
                     fgets(nome, 20, stdin);
                     nome[strcspn(nome, "\n")] = '\0';
 
-                    // Chama a função de manobra passando as duas pilhas
+                    // a função de manobra passando as duas pilhas
                     saindo(&estacionamento, &auxiliar, nome);
                 }
                 break;
@@ -137,16 +136,16 @@ int main() {
                     //desempilhar para mostrar
                     while (!is_empty(estacionamento)) {
                         printf("[%d] Placa: %s\n", vagas_ocupadas + 1, estacionamento->placa);
-                        pop(&estacionamento, temp);
-                        push(&auxiliar, temp);
+                        pop(&estacionamento, temp);//tira da estacionamento
+                        push(&auxiliar, temp);//coloca na auxiliar
                         vagas_ocupadas++;
                     }
                     printf("Total de vagas ocupadas: %d\n", vagas_ocupadas);
 
                     // Rempilhar dnv pra voltar pro estacionamento
                     while (!is_empty(auxiliar)) {
-                        pop(&auxiliar, temp);
-                        push(&estacionamento, temp);
+                        pop(&auxiliar, temp);//tira da auxiliar 
+                        push(&estacionamento, temp);//coloca na estacinamento
                     }
                 }
                 break;
