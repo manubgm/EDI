@@ -1,0 +1,27 @@
+struct no{
+
+}
+
+criar{
+    cria no raiz = null
+}
+
+is_empty{
+    verifica se a arvore tem 
+}
+
+inserir{
+    ler valor
+    if(valor<raiz){
+        coloca ele na esquerda
+    }else{
+        coloca ele na direita
+    }
+}
+
+buscar(recebe buscado){
+    ler arvore ate achar
+    while(buscado!=no){
+        if(no)
+    }
+}

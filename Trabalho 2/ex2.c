@@ -28,9 +28,6 @@ int pop(){
 
 }
 
-void push(){
-
-}
 
 
 
