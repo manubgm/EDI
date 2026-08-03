@@ -34,9 +34,9 @@ int pop(No **topo,char *placa_dest){
     if(is_empty(*topo))return 0;
 
     No *aux = *topo;
-    strcpy(placa_dest, aux->placa); // "Devolve" a placa para quem chamou a função
-    *topo = aux->prox;          // Move o topo para baixo
-    free(aux);                  // libera nó da memória
+    strcpy(placa_dest, aux->placa);
+    *topo = aux->prox;          
+    free(aux);                 
     return 1;
 
 

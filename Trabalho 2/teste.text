@@ -1,0 +1,41 @@
+Teste 1: O Exemplo do Professor (Obrigatório)
+
+
+Entrada: /home/user/docs/../projects/./c/   
+
+
+Saída Esperada: /home/user/projects/c   
+
+O que ele testa: Se o . é ignorado e se o .. apaga apenas a última pasta.
+
+Teste 2: Voltar várias vezes seguidas
+
+Entrada: /a/b/c/../../d/
+
+Saída Esperada: /a/d
+
+O que ele testa: O c entra na pilha e o b também. Os dois .. seguidos devem fazer dois pop() apagando o c e o b, restando só o a para juntar com o d.
+
+Teste 3: Poluição de diretórios atuais
+
+Entrada: /var/./././log/
+
+Saída Esperada: /var/log
+
+O que ele testa: Se o seu código consegue ignorar múltiplos . seguidos sem quebrar.
+
+Teste 4: Cenário de ERRO (Tentativa de voltar antes da raiz)
+
+Entrada: /home/../../
+
+Saída Esperada: Mensagem de Erro! (Algo como "Diretório inválido").
+
+O que ele testa: O home entra. O primeiro .. tira o home (a pilha fica vazia). O segundo .. tenta dar um pop() numa pilha vazia. O programa deve detectar isso com o isEmpty() e encerrar informando o erro, em vez de dar tela azul/segmentation fault.  
+
+Teste 5: Excesso de barras
+
+Entrada: /usr//bin/
+
+Saída Esperada: /usr/bin
+
+O que ele testa: O strtok é esperto. Se houver duas barras juntas //, ele simplesmente pula. Esse teste garante que você não está empilhando pastas com nomes "em branco".

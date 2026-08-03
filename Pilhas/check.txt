@@ -1,0 +1,27 @@
+Identifique o Gatilho (O problema pede pilha?):
+Você sabe que precisa usar uma pilha se o enunciado envolver:
+
+⏪ Desfazer ações (Undo): Como voltar a página de um navegador ou o manobrista do Exercício 1.
+
+⚖️ Balanceamento/Pares: Checar se parênteses, chaves ou tags HTML abrem e fecham na ordem certa (Exercício 2).
+
+🔄 Inversão de ordem ou Histórico recente: Voltar caminhos de diretórios (Exercício 3) ou reverter uma fila de carros.
+
+Adapte a Estrutura (A "Carga"):
+O esqueleto da sua struct é sempre o mesmo. A única coisa que você altera é a "carga" que o nó vai carregar.
+
+Precisa guardar números? Usa int valor;
+
+Precisa guardar caracteres? Usa char c;
+
+Precisa guardar textos? Usa char texto[50];
+
+O ponteiro struct no *prox; é intocável. Ele é a corrente que liga os nós.
+
+Copie a Mecânica Base:
+As funções isEmpty, push e pop mantêm a mesma lógica estrutural. A única adaptação é se a "carga" for uma string (aí você usa strcpy no push e no pop, passando por referência, como acabamos de ver).
+
+A Regra de Ouro da Visão:
+Você é cego para tudo, exceto o topo. Se o exercício pedir para imprimir tudo, procurar um elemento no meio ou mexer na base, crie uma Pilha Auxiliar. Desempilhe da original e empilhe na auxiliar até resolver o problema, depois devolva tudo.
+
+Para testarmos esse "molde universal" juntos: imagine que a prova peça para você fazer o sistema de histórico de abas de um navegador de internet (o botão "Voltar").
